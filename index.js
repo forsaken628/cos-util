@@ -207,6 +207,38 @@ CosUtil.prototype.multipartList = function (params) {
     return p();
 };
 
+CosUtil.prototype.listObject = function (params) {
+    let dirs = [];
+    let objects = [];
+    params.Delimiter = params.Delimiter || '/';
+    let p = () => new Promise((resolve, reject) => {
+        this.cos.getBucket(params, (err, result) => {
+            if (err) {
+                reject(err);
+                return
+            }
+            let pflen = params.Prefix ? params.Prefix.length : 0;
+            result.CommonPrefixes.forEach((v) => {
+                dirs.push({
+                    Name: v.Prefix.slice(pflen, -1),
+                    Prefix: v.Prefix
+                })
+            });
+            result.Contents.forEach((v) => {
+                objects.push(Object.assign({Name: v.Key.slice(pflen)}, v))
+            });
+            if (result.IsTruncated === 'true') {
+                params.Marker = result.NextMarker;
+                return p().then(resolve, reject)
+            } else {
+                //console.log(dirs, objects);
+                resolve({dirs, objects});
+            }
+        })
+    });
+    return p();
+};
+
 function getSliceMD5(fileName, index, start, end) {
     //todo 改md5
     let md5 = crypto.createHash('sha1');
