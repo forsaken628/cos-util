@@ -1,10 +1,10 @@
 {
   "name": "cos-util",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "helpful library for qcloud cos",
   "main": "index.js",
   "scripts": {
-    "dev": "node example.js",
+    "dev": "node run.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "coldWater",

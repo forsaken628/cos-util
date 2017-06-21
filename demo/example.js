@@ -1,9 +1,9 @@
 /**
  * Created by michael on 2017/6/21.
  */
-const cos = require("./index");
+const Cos = require("../lib/cos");
 
-let c = new cos.CosUtil({
+let c = new Cos({
     AppId: '',
     SecretId: '',
     SecretKey: ''
