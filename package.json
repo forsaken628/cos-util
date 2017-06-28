@@ -1,6 +1,6 @@
 {
   "name": "cos-util",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "description": "helpful library for qcloud cos",
   "main": "index.js",
   "scripts": {
